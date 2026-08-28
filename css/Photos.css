@@ -1,0 +1,96 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #111;
+  margin: 0;
+  padding: 0;
+  color: #b940bdee;
+  perspective: 1000px;
+  overflow-x: hidden;
+}
+
+.header {
+  text-align: center;
+  font-size: 2rem;
+  padding: 30px;
+  background-color: #000;
+  letter-spacing: 4px;
+  border-bottom: 2px solid #444;
+  animation: cinematicFade 1.5s ease-out forwards;
+  opacity: 0;
+}
+
+.gallery {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 60px;
+  padding: 60px 40px;
+  transform-style: preserve-3d;
+}
+
+/* Individual photo */
+.photo {
+  flex: 0 0 70%;
+  max-width: 480px;
+  scroll-snap-align: center;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #222;
+  transform: rotateY(10deg) scale(0.9) translateY(80px);
+  opacity: 0;
+  transition: transform 0.8s ease, box-shadow 0.4s ease, opacity 0.8s ease;
+  animation: dropReveal 1s ease forwards;
+}
+
+.photo:nth-child(1) { animation-delay: 0.3s; }
+.photo:nth-child(2) { animation-delay: 0.6s; }
+.photo:nth-child(3) { animation-delay: 0.9s; }
+.photo:nth-child(4) { animation-delay: 1.2s; }
+
+/* Hover: 3D pop */
+.photo:hover {
+  transform: rotateY(0deg) scale(1.05);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+.photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 16px;
+  transition: transform 0.6s ease;
+}
+
+/* Subtle zoom on hover */
+.photo:hover img {
+  transform: scale(1.08);
+}
+
+/* Cinematic fade for header */
+@keyframes cinematicFade {
+  from {
+    transform: translateY(-60px);
+    opacity: 0;
+    letter-spacing: 10px;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+    letter-spacing: 4px;
+  }
+}
+
+/* Drop-in animation with perspective */
+@keyframes dropReveal {
+  0% {
+    opacity: 0;
+    transform: rotateX(70deg) scale(0.5) translateY(-200px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(0) scale(1) translateY(0);
+  }
+}
